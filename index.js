@@ -61,7 +61,7 @@ let init = async () => {
 		if (splitDependencies.length > 0 && splitDependencies[0] != '') dependencies = JSON.stringify(splitDependencies);
 		else dependencies = '[]';
 		let fullCode = beauty(config(name, version, perm, credit, desc, group, usage, cooldown, dependencies, info) + '\n\n' + run(message), { indent_size: 2, space_in_empty_paren: true })
-		fs.writeFileSync('ahihi.js', fullCode);
+		fs.writeFileSync(`${name}.js`, fullCode);
 	}
 };
 init();

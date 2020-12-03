@@ -1,25 +1,24 @@
 {
-  "name": "convertv2",
-  "version": "0.0.3",
-  "description": "",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/spermlord/convertv2.git"
-  },
-  "author": "SpermLord",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/spermlord/convertv2/issues"
-  },
-  "dependencies": {
-    "chalk": "^4.1.0",
-    "clear": "^0.1.0",
-    "clui": "^0.3.6",
-    "figlet": "^1.5.0",
-    "fs-extra": "^9.0.1",
-    "inquirer": "^7.3.3",
-    "js-beautify": "^1.13.0",
-    "minimist": "^1.2.5"
-  }
+	"name": "convertv2",
+	"version": "0.0.4",
+	"description": "",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/spermlord/convertv2.git"
+	},
+	"author": "SpermLord",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/spermlord/convertv2/issues"
+	},
+	"dependencies": {
+		"chalk": "^4.1.0",
+		"clear": "^0.1.0",
+		"clui": "^0.3.6",
+		"figlet": "^1.5.0",
+		"fs-extra": "^9.0.1",
+		"inquirer": "^7.3.3",
+		"js-beautify": "^1.13.0"
+	}
 }

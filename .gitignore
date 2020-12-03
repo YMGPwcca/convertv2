@@ -1,3 +1,4 @@
 node_modules/
 package-lock.json
 v1
+dist/

@@ -2,3 +2,6 @@ node_modules/
 package-lock.json
 v1
 dist/
+lib/listCommands.json
+lib/message.js
+lib/*.lang

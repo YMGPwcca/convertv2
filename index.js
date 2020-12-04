@@ -3,16 +3,23 @@ const clear = require('clear');
 const figlet = require('figlet');
 const fs = require('fs-extra');
 const beauty = require('js-beautify').js;
+
+//Clear terminal/command promt interface
+clear();
+
+//Check all required files
+if (!fs.existsSync('lib/message.js') || !fs.existsSync('lib/listCommands.json') || !fs.existsSync('lib/vi.lang')) return console.log(`${chalk.red('[!]')} ${chalk.redBright.underline('Hãy đọc kĩ file README.md để biết cách sử dụng')} ${chalk.red('[!]')}`);
+
+//Print Convertv2 & Version & Author
+console.log(chalk.yellow(figlet.textSync('Convertv2', { horizontalLayout: 'full' })));
+console.log(chalk.magenta(`> Version: ${JSON.parse(fs.readFileSync('package.json')).version}`));
+console.log(chalk.cyan('> By SpermLord'));
+
+//Require functions
 const getCmd = require('./lib/cmd');
 const getText = require('./lib/text');
 const makeInfo = require('./lib/info');
 const getContent = require('./lib/content');
-
-//Clear terminal/command promt interface and print Convertv2
-clear();
-console.log(chalk.yellow(figlet.textSync('Convertv2', { horizontalLayout: 'full' })));
-console.log(chalk.magenta(`> Version: ${JSON.parse(fs.readFileSync('package.json')).version}`));
-console.log(chalk.cyan('> By SpermLord'));
 
 //Create dist folder
 fs.ensureDirSync('dist');
@@ -21,10 +28,18 @@ fs.ensureDirSync('dist');
 var message = fs.readFileSync('lib/message.js', { encoding: 'utf-8' });
 
 //Do the thing
-let init = async () => {
-	//Wait for CLI
-	const credentials = await getCmd.askCmdInfo(message);
-	let { name, version, perm, credit, cooldown, dependencies } = credentials;
+async function init() {
+	//Wait for CLI Input
+	const cmdInfo = await getCmd(message);
+	let { name, version, perm, credit, cooldown, dependencies } = cmdInfo;
+
+	//Require all modules wrote in dependencies
+	let require = '';
+	if (dependencies.length > 0) {
+		dependencies = dependencies.split(', ');
+		for (let a of dependencies) require += `const ${a} = require('${a}');\n`;
+	}
+	else if (dependencies != '') require += `const ${dependencies} = require('${dependencies}');\n`;
 
 	//Get cmd info
 	let config = makeInfo(name, version, perm, credit, cooldown, dependencies);
@@ -45,9 +60,9 @@ let init = async () => {
 	}
 
 	//Write to new file
-	let fullCode = beauty(config + '\n\n' + content, { indent_size: 2, space_in_empty_paren: true })
+	let fullCode = beauty(`${require}\n${config}\n\n${content}`, { indent_size: 2, space_in_empty_paren: true });
 	fs.writeFileSync(`dist/${name}.js`, fullCode);
-	console.log(`${chalk.green.bold('>>>')} ${chalk.green.underline.bold(`Đã ghi vào dist/${name}.js.`)} ${chalk.green.bold('<<<')}`)
-	return console.log(`${chalk.red.bold('>>>')} ${chalk.red.bold(`Bạn sẽ cần phải check lại file 1 lần nữa`)} ${chalk.red.bold('<<<')}`);;
-};
+	console.log(`${chalk.green.bold('>>>')} ${chalk.green.underline.bold(`Đã ghi vào dist/${name}.js.`)} ${chalk.green.bold('<<<')}`);
+	return console.log(`${chalk.red.bold('>>>')} ${chalk.red.bold(`Hãy check lại file để đảm bảo không có lỗi trong quá trình sử dụng`)} ${chalk.red.bold('<<<')}`);;
+}
 init();

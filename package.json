@@ -1,6 +1,6 @@
 {
 	"name": "convertv2",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "",
 	"main": "index.js",
 	"repository": {
@@ -13,12 +13,12 @@
 		"url": "https://github.com/spermlord/convertv2/issues"
 	},
 	"dependencies": {
-		"chalk": "^4.1.0",
-		"clear": "^0.1.0",
-		"clui": "^0.3.6",
-		"figlet": "^1.5.0",
-		"fs-extra": "^9.0.1",
-		"inquirer": "^7.3.3",
-		"js-beautify": "^1.13.0"
+		"chalk": "",
+		"clear": "",
+		"clui": "",
+		"figlet": "",
+		"fs-extra": "",
+		"inquirer": "",
+		"js-beautify": ""
 	}
 }
